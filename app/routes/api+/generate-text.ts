@@ -19,8 +19,6 @@ export async function loader() {
 export async function action({ request }: ActionFunctionArgs) {
   const body = await request.json();
 
-  console.log(body);
-
   const { success, data } = schema.safeParse(body);
 
   if (!success) {

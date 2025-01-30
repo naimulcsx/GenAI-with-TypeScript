@@ -1,6 +1,7 @@
 import { useCompletion } from "ai/react";
+import { MemoizedMarkdown } from "~/components/MemoizedMarkdown";
 
-export default function StreamTextChatPromptExample() {
+export default function StreamTextMarkdownExample() {
   const { completion, complete, input, setInput, isLoading, setCompletion } =
     useCompletion({
       api: "/api/stream-text",
@@ -18,7 +19,7 @@ export default function StreamTextChatPromptExample() {
           rows={4}
         />
         <button
-          onClick={() => complete(input, { body: { markdown: true } })}
+          onClick={() => complete(input)}
           disabled={isLoading}
           className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed transition-colors"
         >
@@ -53,7 +54,9 @@ export default function StreamTextChatPromptExample() {
                 />
               </svg>
             </button>
-            <p className="whitespace-pre-wrap">{completion}</p>
+            <div className="prose prose-invert max-w-none space-y-2">
+              <MemoizedMarkdown id="markdown-example" content={completion} />
+            </div>
           </div>
         )}
       </div>

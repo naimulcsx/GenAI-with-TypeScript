@@ -7,6 +7,7 @@ const model = anthropic("claude-3-5-sonnet-latest");
 
 const schema = z.object({
   prompt: z.string(),
+  markdown: z.boolean().optional(),
 });
 
 export async function loader() {
@@ -19,6 +20,8 @@ export async function loader() {
 export async function action({ request }: ActionFunctionArgs) {
   const body = await request.json();
 
+  console.log(body);
+
   const { success, data } = schema.safeParse(body);
 
   if (!success) {
@@ -26,10 +29,16 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   const prompt = data.prompt;
+  const markdown = data.markdown;
+
+  let finalPrompt = prompt;
+  if (markdown) {
+    finalPrompt = `Please format your response in markdown. ${prompt}`;
+  }
 
   const result = streamText({
     model,
-    prompt,
+    prompt: finalPrompt,
   });
 
   const stream = result.toDataStream();
