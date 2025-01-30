@@ -19,7 +19,7 @@ export default function StreamTextMarkdownExample() {
           rows={4}
         />
         <button
-          onClick={() => complete(input)}
+          onClick={() => complete(input, { body: { markdown: true } })}
           disabled={isLoading}
           className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed transition-colors"
         >

@@ -58,6 +58,9 @@ export async function action({ request }: ActionFunctionArgs) {
     ],
   });
 
+  // We can also return `result.toTextStreamResponse()` directly
+  // as response instance of manually constructing the response
+
   const stream = result.toDataStream();
 
   return new Response(stream, {

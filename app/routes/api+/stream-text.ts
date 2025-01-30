@@ -28,6 +28,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const prompt = data.prompt;
   const markdown = data.markdown;
+  console.log(markdown);
 
   let finalPrompt = prompt;
   if (markdown) {
@@ -39,12 +40,5 @@ export async function action({ request }: ActionFunctionArgs) {
     prompt: finalPrompt,
   });
 
-  const stream = result.toDataStream();
-
-  return new Response(stream, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Transfer-Encoding": "chunked",
-    },
-  });
+  return result.toDataStreamResponse();
 }

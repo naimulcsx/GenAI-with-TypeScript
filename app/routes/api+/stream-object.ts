@@ -70,7 +70,5 @@ export async function action({ request }: ActionFunctionArgs) {
     ],
   });
 
-  const stream = result.toTextStreamResponse();
-
-  return stream;
+  return result.toTextStreamResponse();
 }
