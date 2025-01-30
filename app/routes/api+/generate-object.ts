@@ -1,10 +1,8 @@
-import { generateObject, streamText } from "ai";
-import { anthropic } from "@ai-sdk/anthropic";
+import { generateObject } from "ai";
 import { z } from "zod";
 import type { ActionFunctionArgs } from "react-router";
 import { type FileUpload, parseFormData } from "@mjackson/form-data-parser";
-
-const model = anthropic("claude-3-5-sonnet-latest");
+import { model } from "~/model";
 
 const invoiceSchema = z
   .object({

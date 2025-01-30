@@ -1,10 +1,8 @@
 import { streamObject } from "ai";
-import { anthropic } from "@ai-sdk/anthropic";
 import { z } from "zod";
 import type { ActionFunctionArgs } from "react-router";
 import { type FileUpload, parseFormData } from "@mjackson/form-data-parser";
-
-const model = anthropic("claude-3-5-sonnet-latest");
+import { model } from "~/model";
 
 const invoiceSchema = z.object({
   total: z.number().describe("The total amount of the invoice."),
