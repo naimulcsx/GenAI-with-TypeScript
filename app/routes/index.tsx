@@ -32,10 +32,10 @@ export default function Index() {
       title: "Generate Object",
       path: "/examples/generate-object",
     },
-    // {
-    //   title: "Stream Object",
-    //   path: "/examples/stream-object",
-    // },
+    {
+      title: "Stream Object",
+      path: "/examples/stream-object",
+    },
   ];
 
   return (
