@@ -24,10 +24,10 @@ export default function Index() {
       title: "Stream Text with Markdown",
       path: "/examples/stream-text-markdown",
     },
-    // {
-    //   title: "Stream Text with Image Prompt",
-    //   path: "/examples/stream-text-image-prompt",
-    // },
+    {
+      title: "Stream Text with Image Prompt",
+      path: "/examples/stream-text-image-prompt",
+    },
     // {
     //   title: "Generate Object",
     //   path: "/examples/generate-object",

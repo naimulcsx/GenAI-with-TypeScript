@@ -2,6 +2,7 @@ import { streamText } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { z } from "zod";
 import type { ActionFunctionArgs } from "react-router";
+import { type FileUpload, parseFormData } from "@mjackson/form-data-parser";
 
 const model = anthropic("claude-3-5-sonnet-latest");
 
@@ -18,15 +19,19 @@ export async function loader() {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const body = await request.json();
+  const formData = await parseFormData(request);
 
-  const { success, data } = schema.safeParse(body);
+  const prompt = formData.get("prompt") as string;
+  const image = formData.get("image") as FileUpload;
+
+  const imageBuffer = await image.arrayBuffer();
+
+  const { success, data } = schema.safeParse({ prompt });
 
   if (!success) {
     return new Response("Missing prompt", { status: 400 });
   }
 
-  const prompt = data.prompt;
   const markdown = data.markdown;
 
   let finalPrompt = prompt;
@@ -36,7 +41,21 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const result = streamText({
     model,
-    prompt: finalPrompt,
+    messages: [
+      {
+        role: "system",
+        content: prompt,
+      },
+      {
+        role: "user",
+        content: [
+          {
+            type: "image",
+            image: imageBuffer,
+          },
+        ],
+      },
+    ],
   });
 
   const stream = result.toDataStream();
