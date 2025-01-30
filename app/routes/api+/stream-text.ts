@@ -28,7 +28,6 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const prompt = data.prompt;
   const markdown = data.markdown;
-  console.log(markdown);
 
   let finalPrompt = prompt;
   if (markdown) {
