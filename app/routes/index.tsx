@@ -28,10 +28,10 @@ export default function Index() {
       title: "Stream Text with Image Prompt",
       path: "/examples/stream-text-image-prompt",
     },
-    // {
-    //   title: "Generate Object",
-    //   path: "/examples/generate-object",
-    // },
+    {
+      title: "Generate Object",
+      path: "/examples/generate-object",
+    },
     // {
     //   title: "Stream Object",
     //   path: "/examples/stream-object",
