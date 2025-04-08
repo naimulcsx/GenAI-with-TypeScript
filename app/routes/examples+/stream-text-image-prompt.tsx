@@ -1,4 +1,4 @@
-import { useCompletion } from "ai/react";
+import { useCompletion } from "@ai-sdk/react";
 import { useState } from "react";
 import { MemoizedMarkdown } from "~/components/MemoizedMarkdown";
 

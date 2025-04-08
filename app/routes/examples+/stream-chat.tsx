@@ -1,10 +1,11 @@
-import { useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
 
 export default function StreamChatUIExample() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } =
-    useChat({
-      api: "/api/stream-chat",
-    });
+  const { messages, input, handleInputChange, handleSubmit, status } = useChat({
+    api: "/api/stream-chat",
+  });
+
+  const isLoading = status === "submitted" || status === "streaming";
 
   return (
     <div className="max-w-4xl w-full mx-auto px-4 py-12">

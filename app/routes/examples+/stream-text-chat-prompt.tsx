@@ -1,4 +1,4 @@
-import { useCompletion } from "ai/react";
+import { useCompletion } from "@ai-sdk/react";
 
 export default function StreamTextChatPromptExample() {
   const { completion, complete, input, setInput, isLoading, setCompletion } =

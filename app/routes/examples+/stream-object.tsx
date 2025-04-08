@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { experimental_useObject as useObject } from "ai/react";
+import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { z } from "zod";
 
 export default function StreamObjectExample() {
