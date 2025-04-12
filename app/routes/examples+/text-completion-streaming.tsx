@@ -5,7 +5,7 @@ import { Loader2, X } from "lucide-react";
 import { readFileSync } from "fs";
 import { examples } from "../index";
 import path from "path";
-import type { Route } from "./+types/stream-text";
+import type { Route } from "./+types/text-completion-streaming";
 import { ExampleLayout } from "~/components/ExampleLayout";
 import { useCompletion } from "@ai-sdk/react";
 import { Switch } from "~/components/ui/switch";
@@ -17,6 +17,14 @@ const suggestions = [
   "Generate a creative story about artificial intelligence",
   "Explain the difference between REST and GraphQL",
 ];
+
+export function meta({ data }: Route.MetaArgs) {
+  return [
+    {
+      title: `${data.meta.title} | Vercel AI SDK Examples`,
+    },
+  ];
+}
 
 export async function loader() {
   const files = [
@@ -43,7 +51,11 @@ export async function loader() {
     };
   });
 
-  return { files: filesWithContent };
+  const meta = examples.find(
+    (e) => e.path === "/examples/text-completion-streaming"
+  )!;
+
+  return { meta, files: filesWithContent };
 }
 
 export default function StreamTextExample({
@@ -56,7 +68,6 @@ export default function StreamTextExample({
     });
   const [renderMarkdown, setRenderMarkdown] = useState(true);
 
-  const example = examples.find((e) => e.path === "/examples/stream-text")!;
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -76,8 +87,8 @@ export default function StreamTextExample({
   return (
     <ExampleLayout
       files={loaderData.files}
-      title={example.title}
-      description={example.description}
+      title={loaderData.meta.title}
+      description={loaderData.meta.description}
     >
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">

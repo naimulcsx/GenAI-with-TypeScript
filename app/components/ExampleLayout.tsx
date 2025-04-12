@@ -27,9 +27,9 @@ export function ExampleLayout({
   return (
     <div className="flex h-full">
       {/* Main content */}
-      <div className="w-[50%] border-r">
+      <div className="w-full">
         <ScrollArea className="h-full">
-          <div className="max-w-3xl mx-auto px-5 py-8">
+          <div className="max-w-4xl mx-auto px-5 py-8">
             <div className="space-y-6">
               <div className="border-b pb-6">
                 <div className="flex items-center gap-3">
@@ -53,7 +53,7 @@ export function ExampleLayout({
       </div>
 
       {/* Code panel */}
-      <div className="w-[50%]">
+      {/* <div className="w-[50%]">
         <ScrollArea className="h-full">
           <div className="p-6">
             <div className="flex items-center gap-2 mb-4">
@@ -78,7 +78,7 @@ export function ExampleLayout({
               </TabsList>
               {files.map((file) => (
                 <TabsContent key={file.name} value={file.name} className="mt-4">
-                  <div className="prose prose-md max-w-none prose-pre:bg-foreground">
+                  <div className="prose prose-md w-full prose-pre:bg-foreground">
                     <MemoizedMarkdown
                       id={`markdown-${file.name}`}
                       content={formatCodeContent(file.content, file.language)}
@@ -89,7 +89,7 @@ export function ExampleLayout({
             </Tabs>
           </div>
         </ScrollArea>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { Loader2, X } from "lucide-react";
 import { readFileSync } from "fs";
 import { examples } from "../index";
 import path from "path";
-import type { Route } from "./+types/generate-text";
+import type { Route } from "./+types/text-completion";
 import { MemoizedMarkdown } from "~/components/MemoizedMarkdown";
 import { ExampleLayout } from "~/components/ExampleLayout";
 import { ScrollArea } from "~/components/ui/scroll-area";
@@ -17,6 +17,14 @@ const suggestions = [
   "Explain quantum computing in simple terms",
   "Write a short poem about nature",
 ];
+
+export function meta({ data }: Route.MetaArgs) {
+  return [
+    {
+      title: `${data.meta.title} | Vercel AI SDK Examples`,
+    },
+  ];
+}
 
 export async function loader() {
   const files = [
@@ -43,7 +51,9 @@ export async function loader() {
     };
   });
 
-  return { files: filesWithContent };
+  const meta = examples.find((e) => e.path === "/examples/text-completion")!;
+
+  return { meta, files: filesWithContent };
 }
 
 export default function GenerateTextExample({
@@ -53,8 +63,6 @@ export default function GenerateTextExample({
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [renderMarkdown, setRenderMarkdown] = useState(true);
-
-  const example = examples.find((e) => e.path === "/examples/generate-text")!;
 
   const handleSend = async () => {
     setCompletion("");
@@ -79,8 +87,8 @@ export default function GenerateTextExample({
   return (
     <ExampleLayout
       files={loaderData.files}
-      title={example.title}
-      description={example.description}
+      title={loaderData.meta.title}
+      description={loaderData.meta.description}
     >
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">

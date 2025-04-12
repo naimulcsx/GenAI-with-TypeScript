@@ -15,7 +15,7 @@ const invoiceSchema = z
     companyName: z
       .string()
       .describe("The name of the company issuing the invoice."),
-    invoiceeAddress: z
+    invoiceAddress: z
       .string()
       .describe("The address of the company or person receiving the invoice."),
   })
