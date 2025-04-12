@@ -1,28 +1,28 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
 import { Loader2, X } from "lucide-react";
 import { readFileSync } from "fs";
 import { examples } from "../index";
 import path from "path";
-import type { Route } from "./+types/generate-text";
-import { MemoizedMarkdown } from "~/components/MemoizedMarkdown";
+import type { Route } from "./+types/stream-text";
 import { ExampleLayout } from "~/components/ExampleLayout";
-import { ScrollArea } from "~/components/ui/scroll-area";
-import { Label } from "~/components/ui/label";
+import { useCompletion } from "@ai-sdk/react";
 import { Switch } from "~/components/ui/switch";
+import { Label } from "~/components/ui/label";
+import { MemoizedMarkdown } from "~/components/MemoizedMarkdown";
+import { ScrollArea } from "~/components/ui/scroll-area";
 
 const suggestions = [
-  "Tell me a joke",
-  "Explain quantum computing in simple terms",
-  "Write a short poem about nature",
+  "Generate a creative story about artificial intelligence",
+  "Explain the difference between REST and GraphQL",
 ];
 
 export async function loader() {
   const files = [
     {
-      name: "api/generate-text.ts",
-      path: "../api+/generate-text.ts",
+      name: "api/stream-text.ts",
+      path: "../api+/stream-text.ts",
       language: "ts",
     },
     {
@@ -46,35 +46,32 @@ export async function loader() {
   return { files: filesWithContent };
 }
 
-export default function GenerateTextExample({
+export default function StreamTextExample({
   loaderData,
 }: Route.ComponentProps) {
-  const [completion, setCompletion] = useState("");
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { completion, complete, input, setInput, isLoading, setCompletion } =
+    useCompletion({
+      api: "/api/stream-text",
+      streamProtocol: "text",
+    });
   const [renderMarkdown, setRenderMarkdown] = useState(true);
 
-  const example = examples.find((e) => e.path === "/examples/generate-text")!;
+  const example = examples.find((e) => e.path === "/examples/stream-text")!;
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  const handleSend = async () => {
-    setCompletion("");
-    setIsLoading(true);
-    try {
-      const response = await fetch("/api/generate-text", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt: input }),
-      });
-      const data = await response.json();
-      setCompletion(data.text);
-    } catch (error) {
-      console.error("Error fetching completion:", error);
-    } finally {
-      setIsLoading(false);
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      const viewport = scrollAreaRef.current.querySelector(
+        "[data-radix-scroll-area-viewport]"
+      );
+      if (viewport) {
+        viewport.scrollTo({
+          top: viewport.scrollHeight,
+          behavior: "smooth",
+        });
+      }
     }
-  };
+  }, [completion]);
 
   return (
     <ExampleLayout
@@ -104,11 +101,11 @@ export default function GenerateTextExample({
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
-              handleSend();
+              complete(input);
             }
           }}
         />
-        <Button onClick={handleSend} disabled={isLoading}>
+        <Button onClick={() => complete(input)} disabled={isLoading}>
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -119,7 +116,7 @@ export default function GenerateTextExample({
           )}
         </Button>
         {completion && (
-          <div className="relative rounded-lg border p-4">
+          <div className="relative rounded-lg border p-1">
             <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
               <h3 className="text-sm font-medium">Response</h3>
               <div className="flex items-center gap-4">
@@ -146,7 +143,10 @@ export default function GenerateTextExample({
                 </Button>
               </div>
             </div>
-            <ScrollArea className="h-[380px] p-3 bg-muted/75 rounded-sm mt-12">
+            <ScrollArea
+              className="h-[380px] p-3 bg-muted/75 rounded-sm mt-12"
+              ref={scrollAreaRef}
+            >
               <div className="prose prose-sm max-w-none mr-4">
                 {renderMarkdown ? (
                   <MemoizedMarkdown

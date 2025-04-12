@@ -78,7 +78,7 @@ export function ExampleLayout({
               </TabsList>
               {files.map((file) => (
                 <TabsContent key={file.name} value={file.name} className="mt-4">
-                  <div className="prose prose-md prose-pre:bg-foreground">
+                  <div className="prose prose-md max-w-none prose-pre:bg-foreground">
                     <MemoizedMarkdown
                       id={`markdown-${file.name}`}
                       content={formatCodeContent(file.content, file.language)}

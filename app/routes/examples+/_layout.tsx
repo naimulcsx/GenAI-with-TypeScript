@@ -10,7 +10,7 @@ export default function ExamplesLayout() {
   return (
     <div className="flex min-h-screen h-screen">
       {/* Sidebar */}
-      <div className="w-72 border-r p-6">
+      <div className="w-64 border-r p-6">
         <Button
           variant="outline"
           size="sm"

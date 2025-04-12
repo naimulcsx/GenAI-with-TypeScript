@@ -21,23 +21,15 @@ export const examples = [
   {
     title: "Generate Text",
     path: "/examples/generate-text",
-    description:
-      "Generate text completions using AI models with a simple prompt-based interface.",
+    description: "Text completions using AI models",
   },
   {
-    title: "Stream Text with Chat Prompt",
-    path: "/examples/stream-text-chat-prompt",
-    description:
-      "Stream text completions using a simple prompt-based interface with real-time updates as the AI generates content.",
+    title: "Stream Text",
+    path: "/examples/stream-text",
+    description: "Text completions using AI models with streaming responses",
   },
   {
-    title: "Stream Text with Markdown",
-    path: "/examples/stream-text-markdown",
-    description:
-      "Generate and stream markdown-formatted text responses that can be rendered as rich content.",
-  },
-  {
-    title: "Stream Text with Image Prompt",
+    title: "Attachments",
     path: "/examples/stream-text-image-prompt",
     description:
       "Upload images and get AI-generated text descriptions and analysis streamed in real-time.",
