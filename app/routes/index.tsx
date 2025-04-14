@@ -50,6 +50,11 @@ export const examples = [
     description:
       "Interactive chat interface with streaming responses, perfect for building conversational AI applications.",
   },
+  {
+    title: "Weather Assistant",
+    path: "/examples/weather-assistant",
+    description: "Get real-time weather information using Tool Calls",
+  },
 ];
 
 export default function Index() {
