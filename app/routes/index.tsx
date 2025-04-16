@@ -55,6 +55,12 @@ export const examples = [
     path: "/examples/weather-assistant",
     description: "Get real-time weather information using Tool Calls",
   },
+  {
+    title: "Commit Message Generator",
+    path: "/examples/commit-formatter",
+    description:
+      "Convert natural language descriptions into conventional commit messages",
+  },
 ];
 
 export default function Index() {
