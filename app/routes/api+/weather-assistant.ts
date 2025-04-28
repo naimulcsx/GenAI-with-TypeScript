@@ -40,6 +40,12 @@ export async function action({ request }: ActionFunctionArgs) {
   // Add instruction to format response in markdown for better display
   const result = streamText({
     model,
+    system: `
+    You are a weather assistant.
+    You are given a location and you need to return the weather for that location.
+    If user asks you anything else which is not related to weather or forecast, 
+    you should say "I'm sorry, I can only help with weather information."
+    `,
     messages,
     maxSteps: 2,
     tools: {
