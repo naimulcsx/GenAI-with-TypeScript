@@ -43,7 +43,6 @@ The goal is to create examples needed to build advanced AI applications, includi
 
 - **Image Analysis**  
   Attach images to get textual descriptions and analyses.
-
 - **Invoice Data Extraction**  
   Generate structured data from PDF files using AI models.
 
