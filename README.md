@@ -1,44 +1,67 @@
-# Vercel AI SDK Examples
+# GenAI with TypeScript
 
-A collection of interactive examples demonstrating the capabilities of the Vercel AI SDK with React Router.
+A learning project exploring modern AI application development using TypeScript, focusing on state-of-the-art SDKs, frameworks, and architectural patterns.
 
 ## Overview
 
-This application provides a variety of examples showcasing different features and implementations of the Vercel AI SDK. Each example demonstrates a specific use case for AI integration in web applications.
+The goal is to create examples needed to build advanced AI applications, including model routing, tool calling, RAG (Retrieval Augmented Generation), vector databases, evaluation frameworks, and agent-based systems.
+
+## Technologies Being Explored
+
+- **[Vercel AI SDK](https://sdk.vercel.ai/docs/introduction)** – API and streaming tools for building AI apps.
+- **[Mastra](https://mastra.ai/)** – Unified orchestration for AI agents and tools.
+- **[Assistant UI](https://www.assistant-ui.com/)** – Pre-built UI components for building chat interfaces.
+- **[Langgraph](https://github.com/langchain-ai/langgraphjs)** – Graph-based agent orchestration for complex workflows.
+
+## Core Concepts
+
+- **Model Routing**  
+  Direct prompts or tasks to the appropriate model based on criteria like task type or expected output.
+
+- **Tool/Function Calling**  
+  Enable AI models to call external functions/tools dynamically during interactions.
+
+- **Retrieval Augmented Generation (RAG)**  
+  Enhance model outputs with external knowledge fetched at runtime, usually from vector databases.
+
+- **Vector Databases**  
+  Store and retrieve embeddings to support semantic search and context injection for AI models.
+
+- **Evaluations (Evals)**  
+  Techniques for systematically evaluating the performance and outputs of AI systems.
+
+- **Agents**  
+  Systems where AI models can make decisions, call tools, plan actions, and reason over multi-step tasks.
 
 ## Examples
 
-### 1. Generate Text
+- **Text Completion**  
+  Text completions using AI models.
 
-Generate text completions using AI models with a simple prompt-based interface.
+- **Text Completion (Streaming)**  
+  Text completions using AI models with streaming responses.
 
-### 2. Stream Text with Chat Prompt
+- **Image Analysis**  
+  Attach images to get textual descriptions and analyses.
 
-Stream text completions using a simple prompt-based interface with real-time updates as the AI generates content.
+- **Invoice Data Extraction**  
+  Generate structured data from PDF files using AI models.
 
-### 3. Stream Text with Markdown
+- **Invoice Data Extraction (Streaming)**  
+  Generate structured data from PDF using AI models with streaming response.
 
-Generate and stream markdown-formatted text responses that can be rendered as rich content.
+- **AI Chat Assistant**  
+  Interactive chat interface with streaming AI responses, perfect for building conversational AI applications.
 
-### 4. Stream Text with Image Prompt
+- **Weather Assistant**  
+  Get real-time weather information using Tool Calls.
 
-Upload images and get AI-generated text descriptions and analysis streamed in real-time.
-
-### 5. Generate Object
-
-Generate structured JSON data from documents like invoices, using AI models to extract key information into organized data formats.
-
-### 6. Stream Object
-
-Stream extracted invoice data in real-time as the AI processes and structures information from documents into JSON format.
-
-### 7. Stream Chat System
-
-Interactive chat interface with streaming responses, perfect for building conversational AI applications.
+- **Commit Message Generator**  
+  Convert natural language descriptions into conventional commit messages.
 
 ## Technologies Used
 
 - React 19
 - React Router
-- Vercel AI SDK
+- TypeScript
 - Tailwind CSS

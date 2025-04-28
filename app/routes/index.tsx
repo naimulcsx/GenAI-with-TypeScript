@@ -9,10 +9,11 @@ import {
 
 export function meta() {
   return [
-    { title: "Vercel AI SDK Examples" },
+    { title: "GenAI with TypeScript" },
     {
       name: "description",
-      content: "Explore examples of Vercel AI SDK with React Router.",
+      content:
+        "A learning project exploring modern AI application development using TypeScript, focusing on state-of-the-art SDKs, frameworks, and architectural patterns.",
     },
   ];
 }
@@ -68,10 +69,12 @@ export default function Index() {
     <div className="max-w-6xl mx-auto px-5 py-12">
       <div className="mb-8">
         <h1 className="text-4xl font-bold tracking-tight">
-          Vercel AI SDK Examples
+          GenAI with TypeScript
         </h1>
         <p className="text-lg text-muted-foreground mt-2">
-          Explore examples of Vercel AI SDK with React Router.
+          A learning project exploring modern AI application development using
+          TypeScript, focusing on state-of-the-art SDKs, frameworks, and
+          architectural patterns.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
