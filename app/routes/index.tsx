@@ -68,7 +68,7 @@ export const examples = [
     path: "/examples/commit-formatter",
     description:
       "Convert natural language descriptions into conventional commit messages",
-    tags: ["vercel-ai-sdk", "streaming"],
+    tags: ["vercel-ai-sdk", "streaming", "speech-to-text"],
   },
 ];
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { MemoizedMarkdown } from "~/components/MemoizedMarkdown";
 import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
-import { Loader2, X, Mic, MicOff, StopCircle } from "lucide-react";
+import { Loader2, X, Mic, StopCircle } from "lucide-react";
 import { ExampleLayout } from "~/components/ExampleLayout";
 import { readFileSync } from "fs";
 import path from "path";
@@ -183,9 +183,7 @@ export default function CommitFormatterExample({
               )}
             </Button>
           </div>
-          {error && (
-            <p className="text-sm text-red-500 mt-1">{error.message}</p>
-          )}
+          {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
         </div>
 
         {completion && (
