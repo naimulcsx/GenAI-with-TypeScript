@@ -3,13 +3,14 @@ import { useState } from "react";
 import { MemoizedMarkdown } from "~/components/MemoizedMarkdown";
 import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
-import { Loader2, X } from "lucide-react";
+import { Loader2, X, Mic, MicOff, StopCircle } from "lucide-react";
 import { ExampleLayout } from "~/components/ExampleLayout";
 import { readFileSync } from "fs";
 import path from "path";
 import { examples } from "../index";
 import type { Route } from "./+types/commit-formatter";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { useTranscribe } from "~/hooks/use-transcribe";
 
 interface Preset {
   id: string;
@@ -96,6 +97,13 @@ export default function CommitFormatterExample({
       },
     });
 
+  const { isRecording, isTranscribing, startRecording, stopRecording, error } =
+    useTranscribe({
+      onTranscribe: (transcript) => {
+        setInput(transcript);
+      },
+    });
+
   const handlePresetSelect = (preset: Preset) => {
     setSelectedPreset(preset.id);
     setInput(preset.prompt);
@@ -135,27 +143,49 @@ export default function CommitFormatterExample({
           ))}
         </div>
 
-        <Textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Describe your changes in natural language..."
-          className="min-h-[100px]"
-        />
+        <div className="space-y-2">
+          <Textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Describe your changes in natural language..."
+            className="min-h-[100px]"
+          />
 
-        <div className="flex items-center justify-end">
-          <Button
-            onClick={() => complete(input)}
-            disabled={isLoading || !input}
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Generating...
-              </>
-            ) : (
-              "Generate Commit Message"
-            )}
-          </Button>
+          <div className="flex items-center justify-end gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={isRecording ? stopRecording : startRecording}
+              className={`h-9 w-9 ${
+                isRecording ? "bg-red-100 hover:bg-red-200" : ""
+              }`}
+              disabled={isTranscribing}
+            >
+              {isRecording ? (
+                <StopCircle className="h-4 w-4" />
+              ) : isTranscribing ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Mic className="h-4 w-4" />
+              )}
+            </Button>
+            <Button
+              onClick={() => complete(input)}
+              disabled={isLoading || !input}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Generating...
+                </>
+              ) : (
+                "Generate Commit Message"
+              )}
+            </Button>
+          </div>
+          {error && (
+            <p className="text-sm text-red-500 mt-1">{error.message}</p>
+          )}
         </div>
 
         {completion && (
